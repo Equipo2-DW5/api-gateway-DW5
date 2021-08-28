@@ -33,7 +33,7 @@ const reservationsTypeDefs = gql`
   type Query {
     getReservas: ReservaResponse
     reservationById(reservationId: String!): ReservaResponse
-    transacctionByIdUser(userId: String!): ReservaResponse
+    #transacctionByIdUser(userId: String!): ReservaResponse
   }
 
   type Mutation {

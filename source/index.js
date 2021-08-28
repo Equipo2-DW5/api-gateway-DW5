@@ -11,7 +11,7 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
     dataSources: () => ({
-      usersAPI: new UsersApi(),
+        usersAPI: new UsersApi(),
         reservationAPI: new ReservationAPI()
     }),
     introspection: true,
