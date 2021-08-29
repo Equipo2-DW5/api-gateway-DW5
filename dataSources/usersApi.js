@@ -5,17 +5,38 @@ const serverConfig = require('../source/server');
 class UsersAPI extends RESTDataSource {
     constructor() {
         super();
-        this.baseURL = serverConfig.users_api_url;
+        this.baseURL = serverConfig.usersApiUrl;
     }
 
     async authenticate(credentials) {
-      console.log(credentials)
-        return await this.post('/token/', {...credentials});
+        credentials = new Object(JSON.parse(JSON.stringify(credentials)));
+        return await this.post(`/token/`, credentials);
     }
 
-    async refreshToken(refresh) {
-        return await this.post('/token/refresh/', {refresh});
+    async refreshToken(token) {
+        token = new Object(JSON.parse(JSON.stringify({refresh: token})));
+        return await this.post(`/token/refresh/`, token);
     }
-}
+
+    async userByEmail(email) {
+        return await this.get(`/find/${email}`);
+    }
+
+    async createUser(input) {
+        input = new Object(JSON.parse(JSON.stringify(input)));
+        return await this.post(`/create/`, input);
+    }
+
+    async updateUser(input) {
+        input = new Object(JSON.parse(JSON.stringify(input)));
+        return await this.post(`/update/`, input);
+    }
+
+    async deleteUser(email) {
+        email = new Object(JSON.parse(JSON.stringify({ email })));
+        console.log(email)
+        return await this.post(`/delete/`, email)
+    }
+};
 
 module.exports = UsersAPI;

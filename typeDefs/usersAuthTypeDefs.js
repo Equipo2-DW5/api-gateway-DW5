@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server');
 
-const usersTypeDefs = gql `
+const usersAuthTypeDefs = gql`
     type Tokens {
         refresh: String!
         access: String!
@@ -11,14 +11,14 @@ const usersTypeDefs = gql `
     }
 
     input CredentialsInput {
-        username: String!
+        email: String!
         password: String!
     }
 
-    type Mutation {
+    extend type Mutation {
         authenticate(credentials: CredentialsInput!): Tokens!
         refreshToken(refresh: String!): Access!
     }
 `;
 
-module.exports = usersTypeDefs;
+module.exports = usersAuthTypeDefs;
