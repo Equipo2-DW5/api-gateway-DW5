@@ -8,7 +8,6 @@ class ReservationAPI extends RESTDataSource {
     this.baseURL = serverConfig.reservations_api_url;
   }
   async getReservas(){
-    console.log("here")
     return await this.get(`/reservas`);
   }
   async reservationById(reservationId){
@@ -20,11 +19,11 @@ class ReservationAPI extends RESTDataSource {
   }
 
   async createReservation(reservation){
-    return await this.post('/transactions', {...reservation});
+    return await this.post('/reservas', {...reservation});
   }
 
   async updateReservation(reservation){
-    return await this.put('/transactions', {...reservation});
+    return await this.put('/reservas', {...reservation});
   }
 
 

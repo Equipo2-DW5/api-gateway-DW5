@@ -5,7 +5,6 @@ const resolvers = require('../resolvers/index');
 const UsersApi = require('../dataSources/usersApi');
 const ReservationAPI = require('../dataSources/reservationsApi');
 const authentication = require('../utils/authentication');
-console.log("R",new UsersApi())
 const server = new ApolloServer({
     context: authentication,
     typeDefs,

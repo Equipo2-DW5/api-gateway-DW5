@@ -7,38 +7,56 @@ const reservationsTypeDefs = gql`
     message: String
     data: [Reserva]
   }
-
   type Reserva {
     idReserva: String!
     descripcion: String
     fechaSolicitud: String
     fechaFin: String
-    duracion: Int
+    duracion: String
     idUsuario: String
     idLaboratorio: String
-    estado: String
+    estado: Boolean
+  }
+  input ReservaCreateInput {
+    userId: String
+    userRole: String
+    userEmail: String
+    reserva: ReservaInput
   }
 
   input ReservaInput {
-    idReserva: String!
+    idReserva: String
     descripcion: String
     fechaSolicitud: String
     fechaFin: String
-    duracion: Int
+    duracion: String
     idUsuario: String
     idLaboratorio: String
-    estado: String
+    estado: Boolean
+  }
+  input ReservaUpdateInput {
+    userId: String
+    userRole: String
+    userEmail: String
+    reserva: ReservaInput
+  }
+
+  input ReservaByAnyId {
+    userId: String
+    userRole: String
+    userEmail: String
+    id: String
   }
 
   type Query {
     getReservas: ReservaResponse
-    reservationById(reservationId: String!): ReservaResponse
-    #transacctionByIdUser(userId: String!): ReservaResponse
+    reservationById(reservaByAnyId: ReservaByAnyId!): ReservaResponse
+    reservationByUserId(reservaByAnyId: ReservaByAnyId!): ReservaResponse
   }
 
   type Mutation {
-    createReservation(transaction: ReservaInput!): ReservaResponse
-    updateReservation(transaction: ReservaInput!): ReservaResponse
+    createReservation(reservationCreateRequest: ReservaCreateInput!): ReservaResponse
+    updateReservation(reservationUpdateRequest: ReservaUpdateInput!): ReservaResponse
   }
 `;
 
